@@ -1,0 +1,11 @@
+diff -Naur libdbi-0.6.5.orig/drivers/mysql/dbd_mysql.c libdbi-0.6.5/drivers/mysql/dbd_mysql.c
+--- libdbi-0.6.5.orig/drivers/mysql/dbd_mysql.c	Sat Jun 15 00:08:22 2002
++++ libdbi-0.6.5/drivers/mysql/dbd_mysql.c	Mon Jul 29 01:35:48 2002
+@@ -418,6 +418,7 @@
+ 				break;
+ 			case DBI_TYPE_BINARY:
+ 				row->field_sizes[curfield] = strsizes[curfield];
++				data->d_string = malloc(strsizes[curfield]);
+ 				memcpy(data->d_string, raw, strsizes[curfield]);
+ 				break;
+ 			case DBI_TYPE_DATETIME:
