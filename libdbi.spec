@@ -1,6 +1,6 @@
 Summary:	Database Independent Abstraction Layer for C
 Name:		libdbi
-Version:	0.5
+Version:	0.6
 Release:	1
 License:	LGPL
 Group:		Development/Libraries
@@ -94,7 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-gzip -9nf README PLUGINS TODO
+gzip -9nf README* TODO
 
 %clean 
 rm -rf $RPM_BUILD_ROOT
