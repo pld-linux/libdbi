@@ -93,7 +93,7 @@ zmiany ¼róde³ programu.
 %setup -q
 
 %build
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__automake}
 %{__autoconf}
