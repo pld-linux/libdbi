@@ -5,13 +5,6 @@ Version:	0.6.2
 Release:	2
 License:	LGPL
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	http://prdownloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
@@ -38,13 +31,6 @@ odwoЁywaФ siЙ do wielu rС©nych baz danych, tak©e jednocze╤nie.
 Summary:	Development files for Database Independent Abstraction Layer for C
 Summary(pl):	Pliki dla programistСw u©ywaj╠cych warstwy DBI w C
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
@@ -59,13 +45,6 @@ aplikacji z u©yciem libdbi.
 Summary:	Static Database Independent Abstraction Layer for C libraries
 Summary(pl):	Statyczne biblioteki warstwy DBI w C
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -78,13 +57,6 @@ Statyczne biblioteki warstwy DBI w C.
 Summary:	MySQL plugin for libdbi
 Summary(pl):	Wtyczka MySQL dla libdbi
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-dbd
 
@@ -103,13 +75,6 @@ zmiany ╪rСdeЁ programu.
 Summary:	PostgreSQL plugin for libdbi
 Summary(pl):	Wtyczka PostgreSQL dla libdbi
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-dbd
 
