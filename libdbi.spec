@@ -1,24 +1,17 @@
-#
-# Conditional build:
-#  _without_pgsql
-#
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.6.7
+Version:	0.7.1
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
-# Source0-md5:	29026ec0291f82b28ee51e0a13f86979
+# Source0-md5:	d16eff24c26be4ff917d32d4ddb30da9
 Patch0:		%{name}-opt.patch
-Patch1:		%{name}-no_pgsql.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	mysql-devel
-%{!?_without_pgsql:BuildRequires:	postgresql-devel}
 Requires:	%{name}-dbd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -60,46 +53,9 @@ Static Database Independent Abstraction Layer for C libraries.
 %description static -l pl
 Statyczne biblioteki warstwy DBI w C.
 
-%package dbd-mysql
-Summary:	MySQL plugin for libdbi
-Summary(pl):	Wtyczka MySQL dla libdbi
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Provides:	%{name}-dbd
-
-%description dbd-mysql
-This plugin provides connectivity to MySQL database servers through
-the libdbi database independent abstraction layer. Switching a
-program's plugin does not require recompilation or rewriting source
-code.
-
-%description dbd-mysql -l pl
-Ta wtyczka daje mo¿liwo¶æ ³±czenia siê z serwerami MySQL poprzez
-bibliotekê libdbi. Zmiana u¿ywanej wtyczki nie wymaga rekompilacji ani
-zmiany ¼róde³ programu.
-
-%package dbd-pgsql
-Summary:	PostgreSQL plugin for libdbi
-Summary(pl):	Wtyczka PostgreSQL dla libdbi
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Provides:	%{name}-dbd
-
-%description dbd-pgsql
-This plugin provides connectivity to PostgreSQL database servers
-through the libdbi database independent abstraction layer. Switching a
-program's plugin does not require recompilation or rewriting source
-code.
-
-%description dbd-pgsql -l pl
-Ta wtyczka daje mo¿liwo¶æ ³±czenia siê z serwerami PostgreSQL poprzez
-bibliotekê libdbi. Zmiana u¿ywanej wtyczki nie wymaga rekompilacji ani
-zmiany ¼róde³ programu.
-
 %prep
 %setup -q
 %patch0 -p1
-%{?_without_pgsql:%patch1 -p1}
 
 %build
 rm -f missing
@@ -107,13 +63,12 @@ rm -f missing
 %{__aclocal}
 %{__automake}
 %{__autoconf}
-%configure \
-			--with-mysql \
-%{!?_without_pgsql:	--with-pgsql}
+%configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_libdir}/dbd
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
@@ -125,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README* TODO
+%doc README TODO
 %dir %{_libdir}/dbd
 %attr(755,root,root) %{_libdir}/libdbi.so.*.*
 
@@ -139,16 +94,3 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libdbi.a
-%{_libdir}/dbd/lib*.a
-
-%files dbd-mysql
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/dbd/libmysql.so
-%{_libdir}/dbd/libmysql.la
-
-%if %{!?_without_pgsql:1}0
-%files dbd-pgsql
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/dbd/libpgsql.so
-%{_libdir}/dbd/libpgsql.la
-%endif
