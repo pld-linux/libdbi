@@ -1,6 +1,6 @@
 Summary:	Database Independent Abstraction Layer for C
 Name:		libdbi
-Version:	0.6
+Version:	0.6.2
 Release:	1
 License:	LGPL
 Group:		Development/Libraries
