@@ -1,3 +1,7 @@
+#
+# Conditional build:
+#  _without_pgsql
+#
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
@@ -8,12 +12,13 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
 # Source0-md5:	29026ec0291f82b28ee51e0a13f86979
 Patch0:		%{name}-opt.patch
+Patch1:		%{name}-no_pgsql.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	mysql-devel
-BuildRequires:	postgresql-devel
+%{!?_without_pgsql:BuildRequires:	postgresql-devel}
 Requires:	%{name}-dbd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -94,6 +99,7 @@ zmiany ¼róde³ programu.
 %prep
 %setup -q
 %patch0 -p1
+%{?_without_pgsql:%patch1 -p1}
 
 %build
 rm -f missing
@@ -102,8 +108,8 @@ rm -f missing
 %{__automake}
 %{__autoconf}
 %configure \
-	--with-mysql \
-	--with-pgsql
+			--with-mysql \
+%{!?_without_pgsql:	--with-pgsql}
 %{__make}
 
 %install
@@ -140,7 +146,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/dbd/libmysql.so
 %{_libdir}/dbd/libmysql.la
 
+%if %{!?_without_pgsql:1}0
 %files dbd-pgsql
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/dbd/libpgsql.so
 %{_libdir}/dbd/libpgsql.la
+%endif
