@@ -1,13 +1,12 @@
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.6.5
-Release:	2
+Version:	0.6.7
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/libdbi/%{name}-%{version}.tar.gz
-Patch0:		%{name}-mysql.patch
-Patch1:		%{name}-opt.patch
+Patch0:		%{name}-opt.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -94,7 +93,6 @@ zmiany ¼róde³ programu.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 rm -f missing
