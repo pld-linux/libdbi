@@ -95,7 +95,7 @@ zmiany ¼róde³ programu.
 %build
 libtoolize --copy --force
 aclocal
-automake -a -c
+automake -a -c -f
 autoconf
 %configure \
 	--with-mysql \
