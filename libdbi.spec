@@ -1,12 +1,17 @@
 Summary:	Database Independent Abstraction Layer for C
+Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
 Version:	0.6.2
-Release:	1
+Release:	2
 License:	LGPL
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
+Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	http://prdownloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
@@ -23,35 +28,63 @@ similar to the DBI/DBD layer in Perl. Writing one generic set of code,
 programmers can leverage the power of multiple databases and multiple
 simultaneous database connections by using this framework.
 
+%description -l pl
+libdbi jest implementacj± w C warstwy abstrakcyjnej niezaleønej od
+bazy danych, podobnej do warstwy DBI/DBD w Perlu. Uøywaj±c tego
+∂rodowiska programista moøe za pomoc± jednego, wspÛlnego kodu
+odwo≥ywaÊ siÍ do wielu rÛønych baz danych, takøe jednocze∂nie.
+
 %package devel
 Summary:	Development files for Database Independent Abstraction Layer for C
+Summary(pl):	Pliki dla programistÛw uøywaj±cych warstwy DBI w C
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 The libdbi-devel package contains the header files and documentation
 needed to develop applications with libdbi.
 
+%description devel -l pl
+Ten pakiet zawiera pliki nag≥Ûwkowe i dokumentacjÍ do tworzenia
+aplikacji z uøyciem libdbi.
+
 %package static
 Summary:	Static Database Independent Abstraction Layer for C libraries
+Summary(pl):	Statyczne biblioteki warstwy DBI w C
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name}-devel = %{version}
 
 %description static
 Static Database Independent Abstraction Layer for C libraries.
 
+%description static -l pl
+Statyczne biblioteki warstwy DBI w C.
+
 %package dbd-mysql
 Summary:	MySQL plugin for libdbi
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
+Summary(pl):	Wtyczka MySQL dla libdbi
+Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-dbd
 
@@ -61,12 +94,22 @@ the libdbi database independent abstraction layer. Switching a
 program's plugin does not require recompilation or rewriting source
 code.
 
+%description dbd-mysql -l pl
+Ta wtyczka daje moøliwo∂Ê ≥±czenia siÍ z serwerami MySQL poprzez
+bibliotekÍ libdbi. Zmiana uøywanej wtyczki nie wymaga rekompilacji ani
+zmiany ºrÛde≥ programu.
+
 %package dbd-pgsql
 Summary:	PostgreSQL plugin for libdbi
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
+Summary(pl):	Wtyczka PostgreSQL dla libdbi
+Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-dbd
 
@@ -75,6 +118,11 @@ This plugin provides connectivity to PostgreSQL database servers
 through the libdbi database independent abstraction layer. Switching a
 program's plugin does not require recompilation or rewriting source
 code.
+
+%description dbd-pgsql -l pl
+Ta wtyczka daje moøliwo∂Ê ≥±czenia siÍ z serwerami PostgreSQL poprzez
+bibliotekÍ libdbi. Zmiana uøywanej wtyczki nie wymaga rekompilacji ani
+zmiany ºrÛde≥ programu.
 
 %prep
 %setup -q
@@ -111,7 +159,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc doc/programmers-guide
-%{_libdir}/libdbi.a
 %attr(755,root,root) %{_libdir}/libdbi.la
 %attr(755,root,root) %{_libdir}/libdbi.so
 %{_includedir}/dbi
@@ -123,8 +170,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files dbd-mysql
 %defattr(644,root,root,755)
-%{_libdir}/dbd/libmysql.so
+%attr(755,root,root) %{_libdir}/dbd/libmysql.so
 
 %files dbd-pgsql
 %defattr(644,root,root,755)
-%{_libdir}/dbd/libpgsql.so
+%attr(755,root,root) %{_libdir}/dbd/libpgsql.so
