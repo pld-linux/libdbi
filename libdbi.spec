@@ -78,9 +78,9 @@ gzip -9nf README PLUGINS TODO
 %clean 
 rm -rf $RPM_BUILD_ROOT
 
-%post /sbin/ldconfig
+%post -p /sbin/ldconfig
 
-%postun /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
