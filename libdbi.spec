@@ -1,16 +1,16 @@
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.6.4
+Version:	0.6.5
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://prdownloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/libdbi/%{name}-%{version}.tar.gz
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	mysql-devel
 BuildRequires:	libtool
+BuildRequires:	mysql-devel
 BuildRequires:	postgresql-devel
 Requires:	%{name}-dbd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -93,13 +93,14 @@ zmiany ¼róde³ programu.
 %setup -q
 
 %build
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
-automake -a -c
-autoconf
+%{__automake}
+%{__autoconf}
 %configure \
 	--with-mysql \
 	--with-pgsql
+
 %{__make} \
 	CFLAGS="%{rpmcflags} -ffast-math -fsigned-char -D_REENTRANT"
 
@@ -107,8 +108,6 @@ autoconf
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
-
-gzip -9nf README* TODO ChangeLog
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -118,7 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README* TODO ChangeLog
 %dir %{_libdir}/dbd
 %attr(755,root,root) %{_libdir}/libdbi.so.*.*
 
