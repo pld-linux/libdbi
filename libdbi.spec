@@ -1,8 +1,8 @@
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.6.2
-Release:	2
+Version:	0.6.4
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://prdownloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
@@ -100,14 +100,15 @@ autoconf
 %configure \
 	--with-mysql \
 	--with-pgsql
-%{__make}
+%{__make} \
+	CFLAGS="%{rpmcflags} -ffast-math -fsigned-char -D_REENTRANT"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-gzip -9nf README* TODO
+gzip -9nf README* TODO ChangeLog
 
 %clean
 rm -rf $RPM_BUILD_ROOT
