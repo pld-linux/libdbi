@@ -5,13 +5,14 @@ Version:	0.6.5
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://prdownloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/libdbi/%{name}-%{version}.tar.gz
 Patch0:		%{name}-mysql.patch
+Patch1:		%{name}-opt.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	mysql-devel
 BuildRequires:	libtool
+BuildRequires:	mysql-devel
 BuildRequires:	postgresql-devel
 Requires:	%{name}-dbd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -93,6 +94,7 @@ zmiany ¼róde³ programu.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -109,8 +111,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-gzip -9nf README* TODO
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -119,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README* TODO
 %dir %{_libdir}/dbd
 %attr(755,root,root) %{_libdir}/libdbi.so.*.*
 
