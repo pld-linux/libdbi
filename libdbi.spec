@@ -1,18 +1,17 @@
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.7.1
+Version:	0.7.2
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
-# Source0-md5:	d16eff24c26be4ff917d32d4ddb30da9
+# Source0-md5:	308e5746a2d0804be1d638319ad7b9c0
 Patch0:		%{name}-opt.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-Requires:	%{name}-dbd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,7 +44,7 @@ aplikacji z u¿yciem libdbi.
 Summary:	Static Database Independent Abstraction Layer for C libraries
 Summary(pl):	Statyczne biblioteki warstwy DBI w C
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static Database Independent Abstraction Layer for C libraries.
@@ -58,7 +57,6 @@ Statyczne biblioteki warstwy DBI w C.
 %patch0 -p1
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__automake}
@@ -70,7 +68,8 @@ rm -f missing
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/dbd
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -87,8 +86,8 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc doc/programmers-guide
-%{_libdir}/libdbi.la
 %attr(755,root,root) %{_libdir}/libdbi.so
+%{_libdir}/libdbi.la
 %{_includedir}/dbi
 
 %files static
