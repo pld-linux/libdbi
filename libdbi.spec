@@ -2,10 +2,11 @@ Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
 Version:	0.6.5
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/libdbi/%{name}-%{version}.tar.gz
+# Source0-md5:	d3f8c027a161f71a9891e2cbb55b78e9
 Patch0:		%{name}-mysql.patch
 Patch1:		%{name}-opt.patch
 URL:		http://libdbi.sourceforge.net/
@@ -115,8 +116,8 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
