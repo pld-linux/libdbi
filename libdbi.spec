@@ -127,7 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc doc/programmers-guide
-%attr(755,root,root) %{_libdir}/libdbi.la
+%{_libdir}/libdbi.la
 %attr(755,root,root) %{_libdir}/libdbi.so
 %{_includedir}/dbi
 
@@ -139,9 +139,9 @@ rm -rf $RPM_BUILD_ROOT
 %files dbd-mysql
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/dbd/libmysql.so
-%attr(755,root,root) %{_libdir}/dbd/libmysql.la
+%{_libdir}/dbd/libmysql.la
 
 %files dbd-pgsql
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/dbd/libpgsql.so
-%attr(755,root,root) %{_libdir}/dbd/libpgsql.la
+%{_libdir}/dbd/libpgsql.la
