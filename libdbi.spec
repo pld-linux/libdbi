@@ -1,11 +1,12 @@
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.6.2
-Release:	2
+Version:	0.6.5
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://prdownloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
+Patch0:		%{name}-mysql.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -91,6 +92,7 @@ zmiany ¼róde³ programu.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -136,7 +138,9 @@ rm -rf $RPM_BUILD_ROOT
 %files dbd-mysql
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/dbd/libmysql.so
+%attr(755,root,root) %{_libdir}/dbd/libmysql.la
 
 %files dbd-pgsql
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/dbd/libpgsql.so
+%attr(755,root,root) %{_libdir}/dbd/libpgsql.la
