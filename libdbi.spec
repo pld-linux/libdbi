@@ -6,6 +6,7 @@ Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
+# Source0-md5:	29026ec0291f82b28ee51e0a13f86979
 Patch0:		%{name}-opt.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
