@@ -97,6 +97,7 @@ zmiany ¼róde³ programu.
 %patch1 -p1
 
 %build
+rm -f missing
 %{__libtoolize}
 aclocal
 %{__automake}
