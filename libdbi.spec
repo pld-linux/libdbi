@@ -2,15 +2,19 @@ Summary:	Database Independent Abstraction Layer for C
 Name:		libdbi
 Version:	0.5
 Release:	1
+License:	LGPL
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
-License:	LGPL
+Source0:	http://prdownloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
 URL:		http://libdbi.sourceforge.net/
-Source0:	%{name}-%{version}.tar.gz
-BuildRequires: postgresl-devel
-BuildRequires: mysql-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	mysql-devel
+BuildRequires:	libtool
+BuildRequires:	postgresql-devel
+Requires:	%{name}-dbd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -31,13 +35,25 @@ Requires:	%{name} = %{version}-%{release}
 The libdbi-devel package contains the header files and documentation
 needed to develop applications with libdbi.
 
+%package static
+Summary:	Static Database Independent Abstraction Layer for C libraries
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-devel = %{version}
+
+%description static
+Static Database Independent Abstraction Layer for C libraries.
+
 %package dbd-mysql
 Summary:	MySQL plugin for libdbi
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
-Requires:	%{name} = %{version}-%{release}, mysqlclient9 >= 3.23.22
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-dbd
 
 %description dbd-mysql
 This plugin provides connectivity to MySQL database servers through
@@ -51,7 +67,8 @@ Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
-Requires:	%{name} = %{version}-%{release}, postgresql >= 7.0.3
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-dbd
 
 %description dbd-pgsql
 This plugin provides connectivity to PostgreSQL database servers
@@ -63,14 +80,18 @@ code.
 %setup -q
 
 %build
+libtoolize --copy --force
 aclocal
 automake -a -c
 autoconf
-%configure --with-mysql --with-pgsql
+%configure \
+	--with-mysql \
+	--with-pgsql
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
 gzip -9nf README PLUGINS TODO
@@ -78,31 +99,32 @@ gzip -9nf README PLUGINS TODO
 %clean 
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-
+%post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc *.gz
-%{_libdir}/libdbi.so.*
+%dir %{_libdir}/dbd
+%attr(755,root,root) %{_libdir}/libdbi.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc doc/programmers-guide
-%{_includedir}/dbi/dbi.h
-%{_includedir}/dbi/dbi-dev.h
-%{_includedir}/dbi/dbd.h
 %{_libdir}/libdbi.a
-%{_libdir}/libdbi.la
-%{_libdir}/libdbi.so
+%attr(755,root,root) %{_libdir}/libdbi.la
+%attr(755,root,root) %{_libdir}/libdbi.so
+%{_includedir}/dbi
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libdbi.a
+%{_libdir}/dbd/lib*.a
 
 %files dbd-mysql
 %defattr(644,root,root,755)
 %{_libdir}/dbd/libmysql.so
-%{_libdir}/dbd/libmysql.la
 
 %files dbd-pgsql
 %defattr(644,root,root,755)
 %{_libdir}/dbd/libpgsql.so
-%{_libdir}/dbd/libpgsql.la
