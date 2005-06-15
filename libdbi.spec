@@ -1,4 +1,6 @@
+# Conditional build:
 %bcond_without	static_libs	# don't build static library
+#
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
