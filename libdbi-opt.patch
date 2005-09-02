@@ -1,17 +1,6 @@
---- libdbi-0.6.5/src/Makefile.am.orig	Tue Mar 26 04:38:54 2002
-+++ libdbi-0.6.5/src/Makefile.am	Thu Aug  1 20:12:19 2002
-@@ -10,7 +10,7 @@
- libdbi_la_SOURCES = dbi_main.c dbi_result.c dbd_helper.c atoll.c asprintf.c
- libdbi_la_LDFLAGS = -version-info @LIB_CURRENT@:@LIB_REVISION@:@LIB_AGE@
- 
--CFLAGS = -DDBI_DRIVER_DIR=\"@driverdir@\"
-+CFLAGS = @CFLAGS@ -DDBI_DRIVER_DIR=\"@driverdir@\"
- 
- debug:
- 	$(MAKE) all CFLAGS="@DEBUG@"
---- libdbi-0.6.5/configure.in.orig	Fri Jun 14 06:20:21 2002
-+++ libdbi-0.6.5/configure.in	Thu Aug  1 20:14:35 2002
-@@ -44,24 +44,23 @@
+--- libdbi-0.8.0/configure.in.orig	2005-08-24 21:06:15.000000000 +0200
++++ libdbi-0.8.0/configure.in	2005-09-03 00:01:40.710447896 +0200
+@@ -47,24 +47,23 @@
                  PROFILE="-v -xpg -g -xO4 -fast -native -fsimple -xcg92 -Dsuncc" ;;
          *)
                  DEBUG="-g"
@@ -22,23 +11,23 @@
  
          case $host in
          *-*-linux*)
--                DEBUG="-g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char"
--                CFLAGS="-O20 -ffast-math -D_REENTRANT -fsigned-char"
--                PROFILE="-pg -g -O20 -ffast-math -D_REENTRANT -fsigned-char";;
-+                DEBUG="$CFLAGS -g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char"
-+                CFLAGS="$CFLAGS -ffast-math -D_REENTRANT -fsigned-char"
-+                PROFILE="-pg -g $CFLAGS -ffast-math -D_REENTRANT -fsigned-char";;
+-                DEBUG="-g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
+-                CFLAGS="-O20 -ffast-math -D_REENTRANT -fsigned-char -std=gnu99"
+-                PROFILE="-pg -g -O20 -ffast-math -D_REENTRANT -fsigned-char -std=gnu99";;
++                DEBUG="$CFLAGS -g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
++                CFLAGS="$CFLAGS -ffast-math -D_REENTRANT -fsigned-char -std=gnu99"
++                PROFILE="-pg -g $CFLAGS -ffast-math -D_REENTRANT -fsigned-char -std=gnu99";;
          sparc-sun-*)
-                 DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -mv8"
-                 CFLAGS="-O20 -ffast-math -D__NO_MATH_INLINES -fsigned-char -mv8"
-                 PROFILE="-pg -g -O20 -D__NO_MATH_INLINES -fsigned-char -mv8" ;;
+                 DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -mv8 -std=gnu99"
+                 CFLAGS="-O20 -ffast-math -D__NO_MATH_INLINES -fsigned-char -mv8 -std=gnu99"
+                 PROFILE="-pg -g -O20 -D__NO_MATH_INLINES -fsigned-char -mv8 -std=gnu99" ;;
          *)
--                DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char"
--                CFLAGS="-O20 -D__NO_MATH_INLINES -fsigned-char"
--                PROFILE="-O20 -g -pg -D__NO_MATH_INLINES -fsigned-char" ;;
-+                DEBUG="$CFLAGS -g -Wall -D__NO_MATH_INLINES -fsigned-char"
-+                CFLAGS="$CFLAGS -D__NO_MATH_INLINES -fsigned-char"
-+                PROFILE="$CFLAGS -g -pg -D__NO_MATH_INLINES -fsigned-char" ;;
+-                DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
+-                CFLAGS="-O20 -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
+-                PROFILE="-O20 -g -pg -D__NO_MATH_INLINES -fsigned-char -std=gnu99" ;;
++                DEBUG="$CFLAGS -g -Wall -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
++                CFLAGS="$CFLAGS -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
++                PROFILE="$CFLAGS -g -pg -D__NO_MATH_INLINES -fsigned-char -std=gnu99" ;;
          esac
  fi
  
