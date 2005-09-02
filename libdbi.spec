@@ -1,15 +1,16 @@
+#
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.7.2
+Version:	0.8.0
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
-# Source0-md5:	308e5746a2d0804be1d638319ad7b9c0
+# Source0-md5:	1ea2b4ec8ad7c2e443f65ae7edb0a746
 Patch0:		%{name}-opt.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
