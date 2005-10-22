@@ -5,12 +5,12 @@
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.8.0
+Version:	0.8.1
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
-# Source0-md5:	1ea2b4ec8ad7c2e443f65ae7edb0a746
+# Source0-md5:	72a3d26b410ffb428b7a02d6224075c1
 Patch0:		%{name}-opt.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
