@@ -3,7 +3,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Database Independent Abstraction Layer for C
-Summary(pl):	Warstwa DBI dla C
+Summary(pl.UTF-8):   Warstwa DBI dla C
 Name:		libdbi
 Version:	0.8.1
 Release:	2
@@ -24,15 +24,15 @@ similar to the DBI/DBD layer in Perl. Writing one generic set of code,
 programmers can leverage the power of multiple databases and multiple
 simultaneous database connections by using this framework.
 
-%description -l pl
-libdbi jest implementacj± w C warstwy abstrakcyjnej niezale¿nej od
-bazy danych, podobnej do warstwy DBI/DBD w Perlu. U¿ywaj±c tego
-¶rodowiska programista mo¿e za pomoc± jednego, wspólnego kodu
-odwo³ywaæ siê do wielu ró¿nych baz danych, tak¿e jednocze¶nie.
+%description -l pl.UTF-8
+libdbi jest implementacjÄ… w C warstwy abstrakcyjnej niezaleÅ¼nej od
+bazy danych, podobnej do warstwy DBI/DBD w Perlu. UÅ¼ywajÄ…c tego
+Å›rodowiska programista moÅ¼e za pomocÄ… jednego, wspÃ³lnego kodu
+odwoÅ‚ywaÄ‡ siÄ™ do wielu rÃ³Å¼nych baz danych, takÅ¼e jednoczeÅ›nie.
 
 %package devel
 Summary:	Development files for Database Independent Abstraction Layer for C
-Summary(pl):	Pliki dla programistów u¿ywaj±cych warstwy DBI w C
+Summary(pl.UTF-8):   Pliki dla programistÃ³w uÅ¼ywajÄ…cych warstwy DBI w C
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -40,20 +40,20 @@ Requires:	%{name} = %{version}-%{release}
 The libdbi-devel package contains the header files and documentation
 needed to develop applications with libdbi.
 
-%description devel -l pl
-Ten pakiet zawiera pliki nag³ówkowe i dokumentacjê do tworzenia
-aplikacji z u¿yciem libdbi.
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagÅ‚Ã³wkowe i dokumentacjÄ™ do tworzenia
+aplikacji z uÅ¼yciem libdbi.
 
 %package static
 Summary:	Static Database Independent Abstraction Layer for C libraries
-Summary(pl):	Statyczne biblioteki warstwy DBI w C
+Summary(pl.UTF-8):   Statyczne biblioteki warstwy DBI w C
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static Database Independent Abstraction Layer for C libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczne biblioteki warstwy DBI w C.
 
 %prep
