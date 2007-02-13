@@ -3,7 +3,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Database Independent Abstraction Layer for C
-Summary(pl.UTF-8):   Warstwa DBI dla C
+Summary(pl.UTF-8):	Warstwa DBI dla C
 Name:		libdbi
 Version:	0.8.1
 Release:	2
@@ -32,7 +32,7 @@ odwoływać się do wielu różnych baz danych, także jednocześnie.
 
 %package devel
 Summary:	Development files for Database Independent Abstraction Layer for C
-Summary(pl.UTF-8):   Pliki dla programistów używających warstwy DBI w C
+Summary(pl.UTF-8):	Pliki dla programistów używających warstwy DBI w C
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -46,7 +46,7 @@ aplikacji z użyciem libdbi.
 
 %package static
 Summary:	Static Database Independent Abstraction Layer for C libraries
-Summary(pl.UTF-8):   Statyczne biblioteki warstwy DBI w C
+Summary(pl.UTF-8):	Statyczne biblioteki warstwy DBI w C
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
