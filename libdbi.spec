@@ -6,7 +6,7 @@ Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa DBI dla C
 Name:		libdbi
 Version:	0.8.3
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
@@ -71,10 +71,23 @@ Statyczne biblioteki warstwy DBI w C.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/dbd
+install -d $RPM_BUILD_ROOT{%{_libdir}/dbd,%{_pkgconfigdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+cat >$RPM_BUILD_ROOT/%{_pkgconfigdir}/dbi.pc <<EOF
+prefix=%{_prefix}
+exec_prefix=%{_prefix}
+libdir=%{_libdir}
+includedir=%{_includedir}/dbi
+
+Name: libdbi
+Description: database-independent abstraction layer in C
+Version: %{version}
+Libs: -L\${libdir} -ldbi
+Cflags: -I\${includedir} -I\${includedir}/dbi
+EOF
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -95,6 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libdbi.so
 %{_libdir}/libdbi.la
 %{_includedir}/dbi
+%{_pkgconfigdir}/dbi.pc
 
 %if %{with static_libs}
 %files static
