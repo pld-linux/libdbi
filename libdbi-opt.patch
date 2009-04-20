@@ -1,33 +1,14 @@
---- libdbi-0.8.0/configure.in.orig	2005-08-24 21:06:15.000000000 +0200
-+++ libdbi-0.8.0/configure.in	2005-09-03 00:01:40.710447896 +0200
-@@ -47,24 +47,23 @@
-                 PROFILE="-v -xpg -g -xO4 -fast -native -fsimple -xcg92 -Dsuncc" ;;
-         *)
-                 DEBUG="-g"
--                CFLAGS="-O"
-                 PROFILE="-g -p" ;;
-         esac
- else
+--- libdbi/configure.in.orig	2009-04-20 15:30:27.275643338 +0200
++++ libdbi/configure.in	2009-04-20 15:36:41.845670451 +0200
+@@ -68,9 +68,9 @@
  
          case $host in
          *-*-linux*)
 -                DEBUG="-g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
--                CFLAGS="-O20 -ffast-math -D_REENTRANT -fsigned-char -std=gnu99"
++                DEBUG="-g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char -std=gnu99 $CFLAGS"
+                 CFLAGS="-O20 -ffast-math -D_REENTRANT -fsigned-char -std=gnu99 $CFLAGS"
 -                PROFILE="-pg -g -O20 -ffast-math -D_REENTRANT -fsigned-char -std=gnu99";;
-+                DEBUG="$CFLAGS -g -Wall -D_REENTRANT -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
-+                CFLAGS="$CFLAGS -ffast-math -D_REENTRANT -fsigned-char -std=gnu99"
-+                PROFILE="-pg -g $CFLAGS -ffast-math -D_REENTRANT -fsigned-char -std=gnu99";;
++                PROFILE="-pg -g -O20 -ffast-math -D_REENTRANT -fsigned-char -std=gnu99 $CFLAGS";;
          sparc-sun-*)
                  DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -mv8 -std=gnu99"
-                 CFLAGS="-O20 -ffast-math -D__NO_MATH_INLINES -fsigned-char -mv8 -std=gnu99"
-                 PROFILE="-pg -g -O20 -D__NO_MATH_INLINES -fsigned-char -mv8 -std=gnu99" ;;
-         *)
--                DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
--                CFLAGS="-O20 -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
--                PROFILE="-O20 -g -pg -D__NO_MATH_INLINES -fsigned-char -std=gnu99" ;;
-+                DEBUG="$CFLAGS -g -Wall -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
-+                CFLAGS="$CFLAGS -D__NO_MATH_INLINES -fsigned-char -std=gnu99"
-+                PROFILE="$CFLAGS -g -pg -D__NO_MATH_INLINES -fsigned-char -std=gnu99" ;;
-         esac
- fi
- 
+                 CFLAGS="-O20 -ffast-math -D__NO_MATH_INLINES -fsigned-char -mv8 -std=gnu99 $CFLAGS"
