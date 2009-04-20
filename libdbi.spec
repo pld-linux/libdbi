@@ -5,13 +5,15 @@
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.8.3
-Release:	2
+%define	_snap	20090420
+Version:	0.8.4
+Release:	0.%{_snap}.1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
-# Source0-md5:	ca66db78d479cbfa727cf3245b5864ae
-Patch0:		%{name}-opt.patch
+#Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
+Source0:	%{name}-%{_snap}.tar.gz
+# Source0-md5:	dcd546b78d4d406520caf802b24ec7c6
+Patch0:		%{name}-borked_snapshot.patch
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -57,12 +59,15 @@ Static Database Independent Abstraction Layer for C libraries.
 Statyczne biblioteki warstwy DBI w C.
 
 %prep
-%setup -q
+%setup -q -n %{name}
+#snapshot hack below
+touch doc/libdbi-versioning.sgml
 %patch0 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal}
+%{__autoheader}
 %{__automake}
 %{__autoconf}
 %configure \
@@ -104,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/programmers-guide
+%doc doc/driver-guide doc/programmers-guide doc/programmers-guide.pdf
 %attr(755,root,root) %{_libdir}/libdbi.so
 %{_libdir}/libdbi.la
 %{_includedir}/dbi
