@@ -18,6 +18,11 @@ URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+BuildRequires:	jadetex
+BuildRequires:	docbook-dtd41-sgml
+BuildRequires:	texlive-fonts-ams
+BuildRequires:	texlive-fonts-type1-urw
+BuildRequires:	texlive-fonts-stmaryrd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
