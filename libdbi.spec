@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
+%bcond_without	doc			# don't build documentation
 #
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa DBI dla C
@@ -18,11 +19,13 @@ URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+%if %{with doc}
 BuildRequires:	jadetex
 BuildRequires:	docbook-dtd41-sgml
 BuildRequires:	texlive-fonts-ams
 BuildRequires:	texlive-fonts-type1-urw
 BuildRequires:	texlive-fonts-stmaryrd
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -76,7 +79,8 @@ touch doc/libdbi-versioning.sgml
 %{__automake}
 %{__autoconf}
 %configure \
-	%{!?with_static_libs:--disable-static}
+	%{!?with_static_libs:--disable-static} \
+	%{!?with_doc:--disable-docs}
 %{__make}
 
 %install
@@ -114,7 +118,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%if %{with doc}
 %doc doc/driver-guide doc/programmers-guide doc/programmers-guide.pdf
+%endif
 %attr(755,root,root) %{_libdir}/libdbi.so
 %{_libdir}/libdbi.la
 %{_includedir}/dbi
