@@ -1,0 +1,9 @@
+- added Source url,
+- added BuildRequires rules,
+- added static subpackage,
+- removed .la files from dbd-* subpackages (not neccessary),
+- removed "postgresql >= 7.0.3" and "mysqlclient9 >= 3.23.22" Requires rules
+  from dbd-* subpackes,
+- soem cleanups in %files,
+- added "Provides: %{name}-dbd" for dbd-* subpackages adn "Require: %{name}-dbd"
+  for main rules for prevent install libdbi without any dbd backend module.
