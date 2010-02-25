@@ -2,17 +2,18 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 %bcond_without	doc			# don't build documentation
-#
+
+%define		subver	20090420
+%define		rel		2
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa DBI dla C
 Name:		libdbi
-%define	_snap	20090420
 Version:	0.8.4
-Release:	0.%{_snap}.1
+Release:	0.%{subver}.%{rel}
 License:	LGPL v2+
 Group:		Libraries
 #Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
-Source0:	%{name}-%{_snap}.tar.gz
+Source0:	%{name}-%{subver}.tar.gz
 # Source0-md5:	dcd546b78d4d406520caf802b24ec7c6
 Patch0:		%{name}-borked_snapshot.patch
 URL:		http://libdbi.sourceforge.net/
@@ -20,11 +21,11 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 %if %{with doc}
-BuildRequires:	jadetex
 BuildRequires:	docbook-dtd41-sgml
+BuildRequires:	jadetex
 BuildRequires:	texlive-fonts-ams
-BuildRequires:	texlive-fonts-type1-urw
 BuildRequires:	texlive-fonts-stmaryrd
+BuildRequires:	texlive-fonts-type1-urw
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -68,7 +69,7 @@ Statyczne biblioteki warstwy DBI w C.
 
 %prep
 %setup -q -n %{name}
-#snapshot hack below
+# snapshot hack below
 touch doc/libdbi-versioning.sgml
 %patch0 -p1
 
@@ -90,7 +91,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir}/dbd,%{_pkgconfigdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-cat >$RPM_BUILD_ROOT/%{_pkgconfigdir}/dbi.pc <<EOF
+cat > $RPM_BUILD_ROOT/%{_pkgconfigdir}/dbi.pc <<'EOF'
 prefix=%{_prefix}
 exec_prefix=%{_prefix}
 libdir=%{_libdir}
@@ -99,8 +100,8 @@ includedir=%{_includedir}/dbi
 Name: libdbi
 Description: database-independent abstraction layer in C
 Version: %{version}
-Libs: -L\${libdir} -ldbi
-Cflags: -I\${includedir} -I\${includedir}/dbi
+Libs: -L${libdir} -ldbi
+Cflags: -I${includedir} -I${includedir}/dbi
 EOF
 
 %clean
