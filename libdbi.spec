@@ -1,10 +1,14 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
-%bcond_without	doc			# don't build documentation
+%if "%{pld_release}" == "ti"
+%bcond_with	doc		# don't build documentation
+%else
+%bcond_without	doc		# don't build documentation
+%endif
 
 %define		subver	20090420
-%define		rel		2
+%define		rel		3
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa DBI dla C
 Name:		libdbi
@@ -23,9 +27,15 @@ BuildRequires:	libtool
 %if %{with doc}
 BuildRequires:	docbook-dtd41-sgml
 BuildRequires:	jadetex
+%if "%{pld_release}" == "ti"
+BuildRequires:	tetex-fonts-ams
+BuildRequires:	tetex-fonts-stmaryrd
+BuildRequires:	tetex-fonts-type1-urw
+%else
 BuildRequires:	texlive-fonts-ams
 BuildRequires:	texlive-fonts-stmaryrd
 BuildRequires:	texlive-fonts-type1-urw
+%endif
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
