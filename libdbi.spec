@@ -33,8 +33,15 @@ BuildRequires:	tetex-fonts-stmaryrd
 BuildRequires:	tetex-fonts-type1-urw
 %else
 BuildRequires:	texlive-fonts-ams
+BuildRequires:	texlive-fonts-marvosym
 BuildRequires:	texlive-fonts-stmaryrd
 BuildRequires:	texlive-fonts-type1-urw
+BuildRequires:	texlive-format-pdflatex
+BuildRequires:	texlive-latex-ams
+BuildRequires:	texlive-latex-extend
+BuildRequires:	texlive-latex-wasysym
+BuildRequires:	texlive-xetex
+BuildRequires:	texlive-xmltex
 %endif
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
