@@ -7,26 +7,27 @@
 %bcond_without	doc		# don't build documentation
 %endif
 
-%define		subver	20090420
-%define		rel		3
+%define		subver	20100921
+%define		rel		1
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa DBI dla C
 Name:		libdbi
-Version:	0.8.4
+Version:	0.9.0
 Release:	0.%{subver}.%{rel}
 License:	LGPL v2+
 Group:		Libraries
 #Source0:	http://dl.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
 Source0:	%{name}-%{subver}.tar.gz
-# Source0-md5:	dcd546b78d4d406520caf802b24ec7c6
-Patch0:		%{name}-borked_snapshot.patch
+# Source0-md5:	451346912fdd1c8f66c5942d7f9a99b3
 URL:		http://libdbi.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 %if %{with doc}
 BuildRequires:	docbook-dtd41-sgml
+BuildRequires:	docbook-style-dsssl
 BuildRequires:	jadetex
+BuildRequires:	openjade
 %if "%{pld_release}" == "ti"
 BuildRequires:	tetex-fonts-ams
 BuildRequires:	tetex-fonts-stmaryrd
@@ -65,12 +66,24 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-The libdbi-devel package contains the header files and documentation
-needed to develop applications with libdbi.
+The libdbi-devel package contains the header files needed to develop
+applications with libdbi.
 
 %description devel -l pl.UTF-8
-Ten pakiet zawiera pliki nagłówkowe i dokumentację do tworzenia
-aplikacji z użyciem libdbi.
+Ten pakiet zawiera pliki nagłówkowe do tworzenia aplikacji z użyciem libdbi.
+
+%if %{with doc}
+%package doc
+Summary:	Documentation for Database Independent Abstraction Layer for C
+Summary(pl.UTF-8):	Dokumentacja dla programistów używających warstwy DBI w C
+Group:		Documentation
+
+%description doc
+Documentation for Database Independent Abstraction Layer for C.
+
+%description devel -l pl.UTF-8
+Dokumentacja dla programistów używających warstwy DBI w C.
+%endif
 
 %package static
 Summary:	Static Database Independent Abstraction Layer for C libraries
@@ -86,9 +99,6 @@ Statyczne biblioteki warstwy DBI w C.
 
 %prep
 %setup -q -n %{name}
-# snapshot hack below
-touch doc/libdbi-versioning.sgml
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -121,6 +131,10 @@ Libs: -L${libdir} -ldbi
 Cflags: -I${includedir} -I${includedir}/dbi
 EOF
 
+%if %{with doc}
+rm -rf $RPM_BUILD_ROOT/%{_datadir}/doc
+%endif
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -131,18 +145,20 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_libdir}/libdbi.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdbi.so.0
+%attr(755,root,root) %ghost %{_libdir}/libdbi.so.1
 %dir %{_libdir}/dbd
 
 %files devel
 %defattr(644,root,root,755)
-%if %{with doc}
-%doc doc/driver-guide doc/programmers-guide doc/programmers-guide.pdf
-%endif
 %attr(755,root,root) %{_libdir}/libdbi.so
 %{_libdir}/libdbi.la
 %{_includedir}/dbi
 %{_pkgconfigdir}/dbi.pc
+
+%if %{with doc}
+%files doc
+%doc doc/driver-guide doc/driver-guide.pdf doc/programmers-guide doc/programmers-guide.pdf
+%endif
 
 %if %{with static_libs}
 %files static
