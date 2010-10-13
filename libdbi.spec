@@ -4,7 +4,7 @@
 %if "%{pld_release}" == "ti"
 %bcond_with	doc		# don't build documentation
 %else
-%bcond_without	doc		# don't build documentation
+%bcond_with	doc		# don't build documentation
 %endif
 
 %define		subver	20100921
