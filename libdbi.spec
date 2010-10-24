@@ -2,15 +2,15 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 %if "%{pld_release}" == "ti"
-%bcond_with	doc		# don't build documentation
+%bcond_with	doc		# build documentation
 %else
-%bcond_with	doc		# don't build documentation
+%bcond_with	doc		# build documentation
 %endif
 
 %define		subver	20100921
 %define		rel		1
 Summary:	Database Independent Abstraction Layer for C
-Summary(pl.UTF-8):	Warstwa DBI dla C
+Summary(pl.UTF-8):	Warstwa abstrakcji baz danych dla C
 Name:		libdbi
 Version:	0.9.0
 Release:	0.%{subver}.%{rel}
@@ -70,20 +70,8 @@ The libdbi-devel package contains the header files needed to develop
 applications with libdbi.
 
 %description devel -l pl.UTF-8
-Ten pakiet zawiera pliki nagłówkowe do tworzenia aplikacji z użyciem libdbi.
-
-%if %{with doc}
-%package doc
-Summary:	Documentation for Database Independent Abstraction Layer for C
-Summary(pl.UTF-8):	Dokumentacja dla programistów używających warstwy DBI w C
-Group:		Documentation
-
-%description doc
-Documentation for Database Independent Abstraction Layer for C.
-
-%description devel -l pl.UTF-8
-Dokumentacja dla programistów używających warstwy DBI w C.
-%endif
+Ten pakiet zawiera pliki nagłówkowe do tworzenia aplikacji z użyciem
+libdbi.
 
 %package static
 Summary:	Static Database Independent Abstraction Layer for C libraries
@@ -96,6 +84,17 @@ Static Database Independent Abstraction Layer for C libraries.
 
 %description static -l pl.UTF-8
 Statyczne biblioteki warstwy DBI w C.
+
+%package doc
+Summary:	Documentation for Database Independent Abstraction Layer for C
+Summary(pl.UTF-8):	Dokumentacja dla programistów używających warstwy DBI w C
+Group:		Documentation
+
+%description doc
+Documentation for Database Independent Abstraction Layer for C.
+
+%description devel -l pl.UTF-8
+Dokumentacja dla programistów używających warstwy DBI w C.
 
 %prep
 %setup -q -n %{name}
@@ -118,7 +117,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir}/dbd,%{_pkgconfigdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-cat > $RPM_BUILD_ROOT/%{_pkgconfigdir}/dbi.pc <<'EOF'
+cat > $RPM_BUILD_ROOT%{_pkgconfigdir}/dbi.pc <<'EOF'
 prefix=%{_prefix}
 exec_prefix=%{_prefix}
 libdir=%{_libdir}
@@ -132,7 +131,7 @@ Cflags: -I${includedir} -I${includedir}/dbi
 EOF
 
 %if %{with doc}
-rm -rf $RPM_BUILD_ROOT/%{_datadir}/doc
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc
 %endif
 
 %clean
@@ -155,13 +154,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/dbi
 %{_pkgconfigdir}/dbi.pc
 
-%if %{with doc}
-%files doc
-%doc doc/driver-guide doc/driver-guide.pdf doc/programmers-guide doc/programmers-guide.pdf
-%endif
-
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libdbi.a
+%endif
+
+%if %{with doc}
+%files doc
+%doc doc/driver-guide doc/driver-guide.pdf doc/programmers-guide doc/programmers-guide.pdf
 %endif
