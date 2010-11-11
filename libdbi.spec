@@ -8,7 +8,7 @@
 %endif
 
 %define		subver	20100921
-%define		rel		1
+%define		rel		2
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa abstrakcji baz danych dla C
 Name:		libdbi
@@ -116,19 +116,6 @@ install -d $RPM_BUILD_ROOT{%{_libdir}/dbd,%{_pkgconfigdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-cat > $RPM_BUILD_ROOT%{_pkgconfigdir}/dbi.pc <<'EOF'
-prefix=%{_prefix}
-exec_prefix=%{_prefix}
-libdir=%{_libdir}
-includedir=%{_includedir}/dbi
-
-Name: libdbi
-Description: database-independent abstraction layer in C
-Version: %{version}
-Libs: -L${libdir} -ldbi
-Cflags: -I${includedir} -I${includedir}/dbi
-EOF
 
 %if %{with doc}
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc
