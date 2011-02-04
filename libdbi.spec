@@ -66,7 +66,7 @@ Group:		Documentation
 %description doc
 Documentation for Database Independent Abstraction Layer for C.
 
-%description devel -l pl.UTF-8
+%description doc -l pl.UTF-8
 Dokumentacja dla programistów używających warstwy DBI w C.
 
 %prep
