@@ -4,7 +4,7 @@
 %bcond_without	doc		# don't build documentation
 
 %define		subver	pre4
-%define		rel	1
+%define		rel	2
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa abstrakcji baz danych dla C
 Name:		libdbi
