@@ -3,21 +3,19 @@
 %bcond_without	static_libs	# don't build static library
 %bcond_without	doc		# don't build documentation
 
-%define		subver	pre4
-%define		rel	2
 Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa abstrakcji baz danych dla C
 Name:		libdbi
 Version:	0.9.0
-Release:	0.%{subver}.%{rel}
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://libdbi.sourceforge.net/downloads/%{name}-%{version}-%{subver}.tar.gz
-# Source0-md5:	0e159eafad1240c798e9f5b26cce3330
+Source0:	http://downloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
+# Source0-md5:	05e2ceeac4bc85fbe40de8b4b22d9ab3
 URL:		http://libdbi.sourceforge.net/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -70,21 +68,21 @@ Documentation for Database Independent Abstraction Layer for C.
 Dokumentacja dla programistów używających warstwy DBI w C.
 
 %prep
-%setup -q -n %{name}-%{version}-%{subver}
+%setup -q
 
 %build
 %{__libtoolize}
 %{__aclocal}
+%{__autoconf}
 %{__autoheader}
 %{__automake}
-%{__autoconf}
 %configure \
 	%{!?with_static_libs:--disable-static}
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir}/dbd,%{_pkgconfigdir}}
+install -d $RPM_BUILD_ROOT%{_libdir}/dbd
 
 %{__make} install-exec \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -117,5 +115,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with doc}
 %files doc
+%defattr(644,root,root,755)
 %doc doc/driver-guide doc/driver-guide.pdf doc/programmers-guide doc/programmers-guide.pdf
 %endif
