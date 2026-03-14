@@ -7,7 +7,7 @@ Summary:	Database Independent Abstraction Layer for C
 Summary(pl.UTF-8):	Warstwa abstrakcji baz danych dla C
 Name:		libdbi
 Version:	0.9.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/libdbi/%{name}-%{version}.tar.gz
